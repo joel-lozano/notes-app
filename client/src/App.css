@@ -1,0 +1,34 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+main {
+    border: 1px solid white;
+    display: flex;
+    height: 100vh;
+}
+
+section {
+    border: 1px solid white;
+    margin: 5rem;
+}
+
+.note-viewer {
+    flex: 1;
+}
+
+.note-viewer .current-note-title {
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    font-size: 5rem;
+    height: 20%;
+}
+
+.notes-list {
+    flex: 1;
+}
+
+h3 {
+    margin: 0;
+}

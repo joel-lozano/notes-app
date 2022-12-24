@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Note, ErrorMessage } from './Types';
+import './App.css';
 
 function App() {
 	const [notes, setNotes] = useState<Array<Note>>([]);
@@ -71,18 +72,27 @@ function App() {
 
 	return (
 		<div className="App">
-			<header className="App-header">
-				<p>Welcome to the notes app!</p>
+			<header>
 				<form onSubmit={handleSubmit}>
 					<label htmlFor="new-note-input">Note name:</label>
 					<input type="text" id="new-note-input" ref={inputRef} />
 					<input type="submit" />
 				</form>
 			</header>
-			<div className="notes-list">
-				<h3>Current notes:</h3>
-				<ul>{notesList.length === 0 ? "No notes" : notesList}</ul>
-			</div>
+			<main>
+				<section className="note-viewer">
+					<div className="current-note-title">
+						Place
+					</div>
+					<div className="current-note-content">
+						Holder
+					</div>
+				</section>
+				<section className="notes-list">
+					<h3>Notes:</h3>
+					<ul>{notesList.length === 0 ? "No notes" : notesList}</ul>
+				</section>
+			</main>
 		</div>
 	);
 }
