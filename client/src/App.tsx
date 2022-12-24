@@ -7,17 +7,14 @@ function App() {
 
 	async function refreshNotes(): Promise<void> {
 		try {
-			const response: Response = await fetch('/notes');
-			const data: Array<Note> | ErrorMessage = await response.json();
-			
-			if (!Array.isArray(data)) {
+			const data: Array<Note> | ErrorMessage = await (await fetch('/notes')).json();
+			if (Array.isArray(data)) {
+				setNotes(data);
+			} else {
 				throw new Error(data.message);
 			}
-
-			setNotes(data);
 		} catch (error: any) {
 			let message;
-
 			if (error instanceof Error) {
 				message = error.message;
 			} else {
@@ -42,11 +39,26 @@ function App() {
 				'title': inputRef.current?.value,
 				'content': 'New Note'
 			}),
-		}
+		};
 
-		fetch('/notes', requestOptions)
-			.then((res: Response) => console.log(res.json()))
-			.catch((err: Error) => console.log(err));
+		(async (): Promise<void> => {
+			try {
+				const data: Note = await (
+					await fetch('/notes', requestOptions)
+				).json();
+
+				// Add some type of error checking
+				// Make use of data declared above
+
+				console.log('Note created successfully');
+			} catch (error) {
+				console.error(error);
+			}
+		})();
+
+		// fetch('/notes', requestOptions)
+		// 	.then((res: Response) => console.log(res.json()))
+		// 	.catch((err: Error) => console.log(err));
 
 		refreshNotes();
 	}
