@@ -1,11 +1,11 @@
 import dbConfig from './config/database.config';
 import notes from './routes/note.routes';
 import mongoose from 'mongoose';
-import express from 'express';
+import express, { Application } from 'express';
 
 const PORT = 3000;
 
-const app = express();
+const app: Application = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
