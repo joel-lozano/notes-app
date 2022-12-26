@@ -4,10 +4,9 @@
   "description": "Simple notes app for practice with RESTful APIs.",
   "main": "server.js",
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
-    "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

@@ -6,56 +6,10 @@ main {
     border: 1px solid white;
     display: flex;
     height: 100vh;
+    gap: 6rem;
+    padding: 6rem;
 }
 
 section {
     border: 1px solid white;
-    margin: 5rem;
-}
-
-.note-viewer {
-    flex: 1;
-}
-
-.note-viewer .current-note-title {
-    border-bottom: 1px solid white;
-    display: flex;
-    align-items: center;
-
-    /* Figure out how to make font-size responsive */
-    font-size: 2em;
-
-    height: 20%;
-}
-
-.notes-list {
-    flex: 1;
-    overflow: hidden scroll;
-}
-
-.notes-list ul {
-    padding: 0;
-    margin: 0;
-}
-
-.notes-list li {
-    border-bottom: 1px solid white;
-    list-style: none;
-    cursor: pointer;
-    padding: 1rem;
-}
-
-.notes-list div {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.notes-list .note-title-preview {
-    margin-bottom: 0.5rem;
-}
-
-.notes-list .note-content-preview {
-    font-style: italic;
-    color: gray;
 }

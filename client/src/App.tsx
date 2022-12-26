@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import NoteViewer from './components/NoteViewer'
+import NotesList from './components/NotesList';
 import { Note, ErrorMessage } from './Types';
 import './App.css';
 
@@ -85,17 +87,8 @@ function App() {
 				</form>
 			</header>
 			<main>
-				<section className="note-viewer">
-					<div className="current-note-title">
-						{focusedNote ? focusedNote.title : "No note selected"}
-					</div>
-					<div className="current-note-content">
-						{focusedNote ? focusedNote.content : "Select existing note or create new..."}
-					</div>
-				</section>
-				<section className="notes-list">
-					<ul>{notesList.length === 0 ? "No notes" : notesList}</ul>
-				</section>
+				<NoteViewer note={focusedNote}/>
+				<NotesList list={notesList} />
 			</main>
 		</div>
 	);
