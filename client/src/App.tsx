@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
 	const [notes, setNotes] = useState<Array<Note>>([]);
+	const [focusedNote, setFocusedNote] = useState<Note | null>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	async function refreshNotes(): Promise<void> {
@@ -49,6 +50,7 @@ function App() {
 				).json();
 
 				// Add some type of error checking
+				// Check against possible responses from API
 				// Make use of data declared above
 
 				console.log('Note created successfully');
@@ -57,16 +59,19 @@ function App() {
 			}
 		})();
 
-		// fetch('/notes', requestOptions)
-		// 	.then((res: Response) => console.log(res.json()))
-		// 	.catch((err: Error) => console.log(err));
-
 		refreshNotes();
 	}
 
 	const notesList = notes.map((note) => {
 		return (
-			<li key={note._id}>{note.title}</li>
+			<li key={note._id} onClick={() => setFocusedNote(note)}>
+				<div className="note-title-preview">
+					{note.title}
+				</div>
+				<div className="note-content-preview">
+					{note.content}
+				</div>
+			</li>
 		);
 	});
 
@@ -82,14 +87,13 @@ function App() {
 			<main>
 				<section className="note-viewer">
 					<div className="current-note-title">
-						Place
+						{focusedNote ? focusedNote.title : "No note selected"}
 					</div>
 					<div className="current-note-content">
-						Holder
+						{focusedNote ? focusedNote.content : "Select existing note or create new..."}
 					</div>
 				</section>
 				<section className="notes-list">
-					<h3>Notes:</h3>
 					<ul>{notesList.length === 0 ? "No notes" : notesList}</ul>
 				</section>
 			</main>

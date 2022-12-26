@@ -21,14 +21,41 @@ section {
     border-bottom: 1px solid white;
     display: flex;
     align-items: center;
-    font-size: 5rem;
+
+    /* Figure out how to make font-size responsive */
+    font-size: 2em;
+
     height: 20%;
 }
 
 .notes-list {
     flex: 1;
+    overflow: hidden scroll;
 }
 
-h3 {
+.notes-list ul {
+    padding: 0;
     margin: 0;
+}
+
+.notes-list li {
+    border-bottom: 1px solid white;
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.notes-list div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.notes-list .note-title-preview {
+    margin-bottom: 0.5rem;
+}
+
+.notes-list .note-content-preview {
+    font-style: italic;
+    color: gray;
 }
