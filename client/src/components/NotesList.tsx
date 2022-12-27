@@ -1,3 +1,4 @@
+import NewNoteButton from './NewNoteButton';
 import './NotesList.css'
 
 export default function NotesList(props: any) {
@@ -5,7 +6,10 @@ export default function NotesList(props: any) {
 
     return (
         <section className="notes-list">
-            <ul>{notesList.length === 0 ? "No notes" : notesList}</ul>
+            <ul>
+                <NewNoteButton />
+                {notesList}
+            </ul>
         </section>
     );
 }

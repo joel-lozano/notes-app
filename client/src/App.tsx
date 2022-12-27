@@ -17,15 +17,8 @@ function App() {
 			} else {
 				throw new Error(data.message);
 			}
-		} catch (error: any) {
-			let message;
-			if (error instanceof Error) {
-				message = error.message;
-			} else {
-				message = String(error);
-			}
-
-			console.error(message);
+		} catch (err: any) {
+			console.error(err.message || String(err) || "Error occurred while fetching notes.");
 		}
 	}
 	
