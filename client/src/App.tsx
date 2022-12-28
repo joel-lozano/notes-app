@@ -7,7 +7,6 @@ import './App.css';
 function App() {
 	const [notes, setNotes] = useState<Array<Note>>([]);
 	const [focusedNote, setFocusedNote] = useState<Note | null>(null);
-	const inputRef = useRef<HTMLInputElement>(null);
 
 	const refreshNotes = async (): Promise<void> => {
 		try {
@@ -26,36 +25,6 @@ function App() {
 	useEffect(() => {
 		refreshNotes();
 	}, []);
-
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-		event.preventDefault();
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				'title': inputRef.current?.value,
-				'content': 'New Note'
-			}),
-		};
-
-		(async (): Promise<void> => {
-			try {
-				const data: Note = await (
-					await fetch('/notes', requestOptions)
-				).json();
-
-				// Add some type of error checking
-				// Check against possible responses from API
-				// Make use of data declared above
-
-				console.log('Note created successfully');
-			} catch (error) {
-				console.error(error);
-			}
-		})();
-
-		refreshNotes();
-	}
 
 	const notesList = notes.map((note) => {
 		return (
