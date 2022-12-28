@@ -7,7 +7,10 @@ export default function NotesList(props: any) {
     return (
         <section className="notes-list">
             <ul>
-                <NewNoteButton />
+                <NewNoteButton 
+                    refreshNotes={props.refreshNotes}
+                    focusNote={props.focusNote}
+                />
                 {notesList}
             </ul>
         </section>

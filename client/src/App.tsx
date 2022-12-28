@@ -9,7 +9,7 @@ function App() {
 	const [focusedNote, setFocusedNote] = useState<Note | null>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	async function refreshNotes(): Promise<void> {
+	const refreshNotes = async (): Promise<void> => {
 		try {
 			const data: Array<Note> | ErrorMessage = await (await fetch('/notes')).json();
 			if (Array.isArray(data)) {
@@ -72,16 +72,12 @@ function App() {
 
 	return (
 		<div className="App">
-			<header>
-				<form onSubmit={handleSubmit}>
-					<label htmlFor="new-note-input">Note name:</label>
-					<input type="text" id="new-note-input" ref={inputRef} />
-					<input type="submit" />
-				</form>
-			</header>
 			<main>
 				<NoteViewer note={focusedNote}/>
-				<NotesList list={notesList} />
+				<NotesList list={notesList}
+					refreshNotes={refreshNotes}
+					focusNote={setFocusedNote}
+				/>
 			</main>
 		</div>
 	);

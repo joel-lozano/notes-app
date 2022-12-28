@@ -5,9 +5,9 @@ body {
 main {
     border: 1px solid white;
     display: flex;
-    height: 100vh;
-    gap: 6rem;
-    padding: 6rem;
+    height: 84vh;
+    gap: 12rem;
+    padding: 3rem 12rem;
 }
 
 section {
