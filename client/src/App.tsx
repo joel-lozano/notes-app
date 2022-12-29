@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import NoteViewer from './components/NoteViewer'
+import { useState, useEffect } from 'react';
+import NoteEditor from './components/NoteEditor';
 import NotesList from './components/NotesList';
 import { Note, ErrorMessage } from './Types';
 import './App.css';
@@ -42,7 +42,7 @@ function App() {
 	return (
 		<div className="App">
 			<main>
-				<NoteViewer note={focusedNote}/>
+				<NoteEditor note={focusedNote}/>
 				<NotesList list={notesList}
 					refreshNotes={refreshNotes}
 					focusNote={setFocusedNote}

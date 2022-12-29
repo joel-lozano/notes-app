@@ -1,0 +1,31 @@
+.note-editor {
+    flex: 1;
+    position: relative;
+}
+
+.note-editor .focused-note-title {
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    
+    /* Figure out how to make font-size responsive */
+    font-size: 2em;
+    
+    height: 20%;
+    padding: 1rem;
+}
+
+.note-editor .focused-note-content {
+    padding: 1rem;
+}
+
+.note-editor .icons {
+    position: absolute;
+    bottom: 0.2rem;
+    right: 0.4rem;
+}
+
+.note-editor .material-symbols-outlined {
+    font-size: 3rem;
+    cursor: pointer;
+}
