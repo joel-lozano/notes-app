@@ -26,19 +26,6 @@ function App() {
 		updateNotes();
 	}, []);
 
-	const notesList = notes.map((note) => {
-		return (
-			<li key={note._id} onClick={() => setFocusedNote(note)}>
-				<div className="note-title-preview">
-					{note.title}
-				</div>
-				<div className="note-content-preview">
-					{note.content}
-				</div>
-			</li>
-		);
-	});
-
 	return (
 		<div className="App">
 			<main>
@@ -47,7 +34,7 @@ function App() {
 					updateNotes={updateNotes}
 				/>
 				<NotesList
-					list={notesList}
+					notes={notes}
 					updateNotes={updateNotes}
 					focusNote={setFocusedNote}
 				/>

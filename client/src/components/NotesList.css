@@ -15,17 +15,24 @@
     padding: 1rem;
 }
 
-.notes-list div {
+.notes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-previews {
+    width: 70%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.notes-list .note-title-preview {
+.note-title-preview {
     margin-bottom: 0.5rem;
 }
 
-.notes-list .note-content-preview {
+.note-content-preview {
     font-style: italic;
     color: gray;
 }
