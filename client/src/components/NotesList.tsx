@@ -8,7 +8,7 @@ export default function NotesList(props: any) {
         <section className="notes-list">
             <ul>
                 <NewNoteButton 
-                    refreshNotes={props.refreshNotes}
+                    updateNotes={props.updateNotes}
                     focusNote={props.focusNote}
                 />
                 {notesList}

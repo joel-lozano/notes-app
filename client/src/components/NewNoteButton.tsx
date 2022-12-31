@@ -3,24 +3,22 @@ import { Note } from '../Types'
 import React from 'react';
 
 export default function NewNoteButton(props: any) {
-    const handleClick = (event: React.MouseEvent): void => {
-        (async (): Promise<void> => {
-            try {
-                const data: Note = await (
-                    await fetch('/notes', { method: 'POST' })
-                ).json();
+    const handleClick = async (event: React.MouseEvent<HTMLLIElement>): Promise<void> => {
+        try {
+            const data: Note = await (
+                await fetch('/notes', { method: 'POST' })
+            ).json();
+
+            // Add some type of error checking
+            // Check against possible responses from API
+            // Make use of data declared above
+
+            props.focusNote(data);
+        } catch (error) {
+            console.error(error);
+        }
     
-                // Add some type of error checking
-                // Check against possible responses from API
-                // Make use of data declared above
-    
-                props.focusNote(data);
-            } catch (error) {
-                console.error(error);
-            }
-        })();
-    
-        props.refreshNotes();
+        props.updateNotes();
     }
 
     return (

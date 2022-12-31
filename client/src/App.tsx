@@ -8,7 +8,7 @@ function App() {
 	const [notes, setNotes] = useState<Array<Note>>([]);
 	const [focusedNote, setFocusedNote] = useState<Note | null>(null);
 
-	const refreshNotes = async (): Promise<void> => {
+	const updateNotes = async (): Promise<void> => {
 		try {
 			const data: Array<Note> | ErrorMessage = await (await fetch('/notes')).json();
 			if (Array.isArray(data)) {
@@ -23,7 +23,7 @@ function App() {
 	
 	// Fetch existing notes on page load
 	useEffect(() => {
-		refreshNotes();
+		updateNotes();
 	}, []);
 
 	const notesList = notes.map((note) => {
@@ -42,9 +42,13 @@ function App() {
 	return (
 		<div className="App">
 			<main>
-				<NoteEditor note={focusedNote}/>
-				<NotesList list={notesList}
-					refreshNotes={refreshNotes}
+				<NoteEditor
+					note={focusedNote}
+					updateNotes={updateNotes}
+				/>
+				<NotesList
+					list={notesList}
+					updateNotes={updateNotes}
 					focusNote={setFocusedNote}
 				/>
 			</main>
