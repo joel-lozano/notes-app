@@ -4,25 +4,22 @@ import './NoteEditor.css';
 
 export default function NoteEditor(props: any) {
     const focusedNote: Note = props.note;
-    const [state, setState] = useState<Note>({
-        title: 'No note selected',
-        content: 'Select existing note or create one to get started.'
-    });
+    const [state, setState] = useState<Note>(focusedNote);
 
     useEffect(() => {
-        if (focusedNote) {
-            setState(focusedNote);
-        }
+        setState(focusedNote);
     }, [focusedNote]);
 
     const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
         let url = '/notes';
         let httpMethod = 'POST';
 
-        if (focusedNote) {
-            url += `/${focusedNote._id}`;
-            httpMethod = 'PUT';
-        };
+        if (!focusedNote._id) {
+            return;
+        }
+
+        url += `/${focusedNote._id}`;
+        httpMethod = 'PUT';
 
         try {
             const data: Note = await (await fetch(url, {
@@ -43,7 +40,7 @@ export default function NoteEditor(props: any) {
     }
 
     const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        if (!focusedNote) {
+        if (!focusedNote._id) {
             return;
         };
 

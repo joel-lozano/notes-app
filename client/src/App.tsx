@@ -4,11 +4,16 @@ import NotesList from './components/NotesList';
 import { Note, ErrorMessage } from './Types';
 import './App.css';
 
+const defaultNote: Note = {
+	title: 'No notes',
+	content: 'Create one to get started.'
+};
+
 function App() {
 	const [notes, setNotes] = useState<Array<Note>>([]);
-	const [focusedNote, setFocusedNote] = useState<Note | null>(null);
+	const [focusedNote, setFocusedNote] = useState<Note>(defaultNote);
 
-	const updateNotes = async (focusFirstNote = false): Promise<void> => {
+	const updateNotes = async (focusFirstNote = false) => {
 		try {
 			const data: Array<Note> | ErrorMessage = await (await fetch('/notes')).json();
 			if (Array.isArray(data)) {
@@ -18,10 +23,11 @@ function App() {
 			}
 
 			if (focusFirstNote) {
-				if (!data.length) {
-					return;
+				if (data.length) {
+					setFocusedNote(data[0]);
+				} else {
+					setFocusedNote(defaultNote);
 				}
-				setFocusedNote(data[0]);
 			}
 		} catch (err: any) {
 			console.error(err.message || String(err) || "Error occurred while fetching notes.");
