@@ -7,7 +7,7 @@ export default function NoteEditor(props: any) {
     const [state, setState] = useState<Note>({
         title: 'No note selected',
         content: 'Select existing note or create one to get started.'
-    })
+    });
 
     useEffect(() => {
         if (focusedNote) {
@@ -15,7 +15,7 @@ export default function NoteEditor(props: any) {
         }
     }, [focusedNote]);
 
-    const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>): Promise<void> => {
+    const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
         let url = '/notes';
         let httpMethod = 'POST';
 
@@ -42,10 +42,30 @@ export default function NoteEditor(props: any) {
         props.updateNotes();
     }
 
+    const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
+        if (!focusedNote) {
+            return;
+        };
+
+        try {
+            const data: Note = await (await fetch(`/notes/${focusedNote._id}`, {
+                    method: 'DELETE',
+                })
+            ).json();
+
+            // Add some type of error checking
+            // Check against possible responses from API
+            // Make use of data declared above
+        } catch (error) {
+            console.error(error);
+        }
+    
+        props.updateNotes(true);
+    }
+
     return (
         <section className="note-editor">
             <textarea className="focused-note-title"
-                // onChange={(event) => handleChange(event, UpdateActionType.Title)}
                 onChange={(event) => setState({ ...state, title: event.target.value })}
                 value={state.title}
             />
@@ -59,6 +79,12 @@ export default function NoteEditor(props: any) {
                     title="Save"
                 >
                     save
+                </span>
+                <span className="material-symbols-outlined"
+                    onClick={handleDeleteClick}
+                    title="Delete"
+                >
+                    delete
                 </span>
             </div>
         </section>

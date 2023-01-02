@@ -11,29 +11,31 @@
     width: 100%;
     padding: 1rem;
     box-sizing: border-box;
+    overflow: auto;
 }
 
 .note-editor .focused-note-title {
     border-bottom: 1px solid white;
-    overflow: hidden;
     
     /* Figure out how to make font-size responsive */
-    font-size: 2em;
+    font-size: 2rem;
     
-    height: 20%;
+    height: 25%;
 }
 
 .note-editor .focused-note-content {
-    height: 69%;
+    height: 61%;
 }
 
 .note-editor .icons {
     position: absolute;
-    bottom: 0.2rem;
-    right: 0.4rem;
+    bottom: 0rem;
+    right: 0rem;
 }
 
 .note-editor .material-symbols-outlined {
     font-size: 3rem;
     cursor: pointer;
+    margin: 1rem;
+    margin-left: 0;
 }

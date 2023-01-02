@@ -4,10 +4,6 @@ import './NotesList.css'
 
 export default function NotesList(props: any) {
     const focusNote = props.focusNote;
-
-    // Figure out how to get id from li for each delete request
-    // const handleDeleteClick = async ()
-
     const notesList: Array<JSX.Element> = props.notes.map((note: Note) => {
 		return (
 			<li key={note._id} onClick={() => focusNote(note)} className="notes">
@@ -18,9 +14,6 @@ export default function NotesList(props: any) {
                     <div className="note-content-preview">
                         {note.content}
                     </div>
-                </span>
-                <span className="material-symbols-outlined">
-                    delete
                 </span>
 			</li>
 		);

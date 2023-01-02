@@ -8,7 +8,7 @@ function App() {
 	const [notes, setNotes] = useState<Array<Note>>([]);
 	const [focusedNote, setFocusedNote] = useState<Note | null>(null);
 
-	const updateNotes = async (): Promise<void> => {
+	const updateNotes = async (focusFirstNote = false): Promise<void> => {
 		try {
 			const data: Array<Note> | ErrorMessage = await (await fetch('/notes')).json();
 			if (Array.isArray(data)) {
@@ -16,14 +16,21 @@ function App() {
 			} else {
 				throw new Error(data.message);
 			}
+
+			if (focusFirstNote) {
+				if (!data.length) {
+					return;
+				}
+				setFocusedNote(data[0]);
+			}
 		} catch (err: any) {
 			console.error(err.message || String(err) || "Error occurred while fetching notes.");
 		}
 	}
 	
-	// Fetch existing notes on page load
+	// Set up initial display on page load
 	useEffect(() => {
-		updateNotes();
+		updateNotes(true);
 	}, []);
 
 	return (

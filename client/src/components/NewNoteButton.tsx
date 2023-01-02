@@ -1,6 +1,6 @@
+import React from 'react';
 import './NewNoteButton.css';
 import { Note } from '../Types'
-import React from 'react';
 
 export default function NewNoteButton(props: any) {
     const handleClick = async (event: React.MouseEvent<HTMLLIElement>): Promise<void> => {
