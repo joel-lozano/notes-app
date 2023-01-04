@@ -51,7 +51,8 @@ function App() {
 				<NotesList
 					notes={notes}
 					updateNotes={updateNotes}
-					focusNote={setFocusedNote}
+					focusedNote={focusedNote}
+					setFocusedNote={setFocusedNote}
 				/>
 			</main>
 		</div>

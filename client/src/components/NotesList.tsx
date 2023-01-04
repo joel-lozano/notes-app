@@ -1,14 +1,32 @@
-import NewNoteButton from './NewNoteButton';
 import parseTimestamp from '../utils/parseTimestamp';
+import NewNoteButton from './NewNoteButton';
 import { Note } from '../Types';
 import './NotesList.css'
 
 export default function NotesList(props: any) {
-    const focusNote = props.focusNote;
+    const setFocusedNote = props.setFocusedNote;
     const notesList: Array<JSX.Element> = props.notes.map((note: Note) => {
         const { date, time } = parseTimestamp(note.updatedAt);
+        let background = 'none';
+
+        /* 
+         * New notes from database won't equal their equivalents in the notes
+         * array because array members don't have access to some of database
+         * notes' properties. Therefore we compare ids instead of the notes
+         * themselves, so new notes can display focused background on creation.
+        */
+        
+        if (note._id === props.focusedNote._id) {
+            background = '#DDDDDD';
+        }
+
 		return (
-			<li key={note._id} onClick={() => focusNote(note)} className="notes">
+			<li
+                key={note._id}
+                className="notes"
+                style={{ background: background }}
+                onClick={() => setFocusedNote(note)}
+            >
                 <span className="previews">
                     <div className="title-preview">
                         {note.title}
@@ -34,7 +52,7 @@ export default function NotesList(props: any) {
             <ul>
                 <NewNoteButton 
                     updateNotes={props.updateNotes}
-                    focusNote={focusNote}
+                    setFocusedNote={setFocusedNote}
                 />
                 {notesList}
             </ul>

@@ -13,7 +13,7 @@ export default function NewNoteButton(props: any) {
             // Check against possible responses from API
             // Make use of data declared above
 
-            props.focusNote(data);
+            props.setFocusedNote(data);
         } catch (error) {
             console.error(error);
         }
