@@ -23,11 +23,13 @@ function App() {
 			}
 
 			if (focusFirstNote) {
+				let noteToFocus = defaultNote;
+
 				if (data.length) {
-					setFocusedNote(data[0]);
-				} else {
-					setFocusedNote(defaultNote);
+					noteToFocus = data[0];
 				}
+
+				setFocusedNote(noteToFocus);
 			}
 		} catch (err: any) {
 			console.error(err.message || String(err) || "Error occurred while fetching notes.");

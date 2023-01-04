@@ -16,22 +16,27 @@
 }
 
 .notes {
-    /* display: flex; */
+    display: flex;
     justify-content: space-between;
 }
 
-.note-previews {
-    width: 70%;
+.notes .previews {
+    width: 80%;
     white-space: nowrap;
     text-overflow: ellipsis;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
-.note-title-preview {
+.notes .title-preview {
     margin-bottom: 0.5rem;
 }
 
-.note-content-preview {
+.notes .content-preview {
     font-style: italic;
     color: gray;
+}
+
+.notes .timestamps {
+    color: gray;
+    font-size: 0.8rem;
 }

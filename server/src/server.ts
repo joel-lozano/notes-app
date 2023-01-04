@@ -1,4 +1,4 @@
-import dbConfig from './config/database.config';
+import dbConfig from '../config/database.config';
 import notes from './routes/note.routes';
 import mongoose from 'mongoose';
 import express, { Application } from 'express';

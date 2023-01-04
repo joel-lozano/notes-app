@@ -11,19 +11,13 @@ export default function NoteEditor(props: any) {
     }, [focusedNote]);
 
     const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        let url = '/notes';
-        let httpMethod = 'POST';
-
         if (!focusedNote._id) {
             return;
         }
 
-        url += `/${focusedNote._id}`;
-        httpMethod = 'PUT';
-
         try {
-            const data: Note = await (await fetch(url, {
-                    method: httpMethod,
+            const data: Note = await (await fetch(`/notes/${focusedNote._id}`, {
+                    method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(state)
                 })
@@ -42,7 +36,7 @@ export default function NoteEditor(props: any) {
     const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
         if (!focusedNote._id) {
             return;
-        };
+        }
 
         try {
             const data: Note = await (await fetch(`/notes/${focusedNote._id}`, {

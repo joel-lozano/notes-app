@@ -13,3 +13,11 @@ main {
 section {
     border: 1px solid white;
 }
+
+@media (width < 1000px) {
+    main {
+        height: 97vh;
+        gap: 0;
+        padding: 0;
+    }
+}
