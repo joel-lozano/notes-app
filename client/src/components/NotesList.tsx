@@ -1,23 +1,29 @@
 import parseTimestamp from '../utils/parseTimestamp';
 import NewNoteButton from './NewNoteButton';
+import { useState } from 'react';
 import { Note } from '../Types';
 import './NotesList.css'
 
 export default function NotesList(props: any) {
+    const [hoveredNote, setHoveredNote] = useState<Note | null>(null);
     const setFocusedNote = props.setFocusedNote;
     const notesList: Array<JSX.Element> = props.notes.map((note: Note) => {
         const { date, time } = parseTimestamp(note.updatedAt);
-        let background = 'none';
+        let background = 'transparent';
 
-        /* 
-         * New notes from database won't equal their equivalents in the notes
-         * array because array members don't have access to some of database
-         * notes' properties. Therefore we compare ids instead of the notes
-         * themselves, so new notes can display focused background on creation.
-        */
+        if (note === hoveredNote) {
+            background = '#DDDDDD'
+        }
         
-        if (note._id === props.focusedNote._id) {
-            background = '#DDDDDD';
+        /* 
+        * New notes from database won't equal their equivalents in the notes
+        * array because array members don't have access to some of database
+        * notes' properties. Therefore we compare ids instead of the notes
+        * themselves, so new notes can display focused background on creation.
+        */
+       
+       if (note._id === props.focusedNote._id) {
+           background = '#DDDFFF';
         }
 
 		return (
@@ -25,6 +31,8 @@ export default function NotesList(props: any) {
                 key={note._id}
                 className="notes"
                 style={{ background: background }}
+                onMouseEnter={() => setHoveredNote(note)}
+                onMouseLeave={() => setHoveredNote(null)}
                 onClick={() => setFocusedNote(note)}
             >
                 <span className="previews">

@@ -15,11 +15,8 @@
 }
 
 .note-editor .focused-note-title {
-    border-bottom: 1px solid white;
-    
-    /* Figure out how to make font-size responsive */
+    border-bottom: 1px solid white;  
     font-size: 2rem;
-    
     height: 25%;
 }
 
@@ -28,14 +25,24 @@
 }
 
 .note-editor .icons {
+    margin: 0rem 1rem 1rem 0rem;
     position: absolute;
     bottom: 0rem;
     right: 0rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
-.note-editor .material-symbols-outlined {
-    font-size: 3rem;
+.note-editor .icons .material-symbols-outlined {
     cursor: pointer;
-    margin: 1rem;
-    margin-left: 0;
+    font-size: 3.5rem;
+    border-radius: 25%;
+}
+
+.note-editor .icons .material-symbols-outlined:hover {
+    background: #DDDDDD;
+}
+
+.note-editor .icons .material-symbols-outlined:active {
+    background: #DDDFFF;
 }

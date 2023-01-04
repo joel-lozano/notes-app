@@ -4,6 +4,14 @@
     gap: 0.7rem;
 }
 
+.new-note-button:hover {
+    background: #DDDDDD;
+}
+
+.new-note-button:active {
+    background-color: #DDDFFF;
+}
+
 .new-note-button .material-symbols-outlined {
     font-size: 2rem;
     margin: 0.4rem 0rem;

@@ -56,22 +56,26 @@ export default function NoteEditor(props: any) {
 
     return (
         <section className="note-editor">
-            <textarea className="focused-note-title"
+            <textarea
+                className="focused-note-title"
                 onChange={(event) => setState({ ...state, title: event.target.value })}
                 value={state.title}
             />
-            <textarea className="focused-note-content"
+            <textarea
+                className="focused-note-content"
                 onChange={(event) => setState({ ...state, content: event.target.value })}
                 value={state.content}
             />
             <div className="icons">
-                <span className="material-symbols-outlined"
+                <span
+                    className="material-symbols-outlined"
                     onClick={handleSaveClick}
                     title="Save"
                 >
                     save
                 </span>
-                <span className="material-symbols-outlined"
+                <span
+                    className="material-symbols-outlined"
                     onClick={handleDeleteClick}
                     title="Delete"
                 >
