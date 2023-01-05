@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import NoteEditor from './components/NoteEditor';
 import NotesList from './components/NotesList';
-import { Note, ErrorMessage } from './Types';
+import Note from './types/Note';
 import './App.css';
 
 const defaultNote: Note = {
@@ -15,7 +15,10 @@ function App() {
 
 	const updateNotes = async (focusFirstNote = false) => {
 		try {
-			const data: Array<Note> | ErrorMessage = await (await fetch('/notes')).json();
+			const data: Array<Note> | { message: string } = await(
+				await fetch('/notes')
+			).json();
+
 			if (Array.isArray(data)) {
 				setNotes(data);
 			} else {
@@ -32,7 +35,7 @@ function App() {
 				setFocusedNote(noteToFocus);
 			}
 		} catch (err: any) {
-			console.error(err.message || String(err) || "Error occurred while fetching notes.");
+			console.error(err.message);
 		}
 	}
 	

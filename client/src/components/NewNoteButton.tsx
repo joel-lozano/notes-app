@@ -3,9 +3,9 @@ import './NewNoteButton.css';
 import { Note } from '../Types'
 
 export default function NewNoteButton(props: any) {
-    const handleClick = async (event: React.MouseEvent<HTMLLIElement>): Promise<void> => {
+    const handleClick = async (event: React.MouseEvent<HTMLLIElement>) => {
         try {
-            const data: Note = await (
+            const data: Note = await(
                 await fetch('/notes', { method: 'POST' })
             ).json();
 
@@ -14,8 +14,8 @@ export default function NewNoteButton(props: any) {
             // Make use of data declared above
 
             props.setFocusedNote(data);
-        } catch (error) {
-            console.error(error);
+        } catch (err: any) {
+            console.error(err.message);
         }
     
         props.updateNotes();

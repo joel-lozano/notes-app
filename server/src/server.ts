@@ -1,26 +1,25 @@
 import dbConfig from '../config/database.config';
-import notes from './routes/note.routes';
+import notesRouter from './routes/note.routes';
 import mongoose from 'mongoose';
-import express, { Application } from 'express';
+import express from 'express';
 
 const PORT = 3000;
-
-const app: Application = express();
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-(async (): Promise<void> => {
+(async () => {
 	try {
 		await mongoose.connect(dbConfig.url);
 		console.log('Connected to database successfully.');
 	} catch (err: any) {
-		console.error(err.message || String(err) || "Error connecting to database. Exiting.");
+		console.error(err.message || "Error connecting to database.");
 		process.exit();
 	}
 })();
 
-app.use('/notes', notes);
+app.use('/notes', notesRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}.`);

@@ -2,7 +2,7 @@ import Note from '../models/note.model';
 import { Request, Response } from 'express';
 
 // Helper function to eliminate string literal repetition
-function idNotFoundMessage(id: string): string {
+function noteNotFoundMessage(id: string): string {
 	return `Note not found with id ${id}.`;
 }
 
@@ -13,22 +13,20 @@ export async function createOne(req: Request, res: Response) {
 	});
 
 	try {
-		const noteCreated = await note.save();
-		res.send(noteCreated);
+		res.send(await note.save());
 	} catch(err: any) {
 		res.status(500).send({
-			message: err.message || String(err) || "Error occurred while creating note."
+			message: err.message || "Error occurred while creating note."
 		});
 	}
 }
 
 export async function findAll(req: Request, res: Response) {
 	try {
-		const notesFound = await Note.find();
-		res.send(notesFound);
+		res.send(await Note.find());
 	} catch(err: any) {
 		res.status(500).send({
-			message: err.message || String(err) || "Error occurred while retrieving notes."
+			message: err.message || "Error occurred while retrieving notes."
 		});
 	}
 }
@@ -41,20 +39,20 @@ export async function findOne(req: Request, res: Response) {
 
 		if (!noteFound) {
 			return res.status(404).send({
-				message: idNotFoundMessage(noteId)
+				message: noteNotFoundMessage(noteId)
 			});
 		}
 
 		res.send(noteFound);
 	} catch(err: any) {
-		if (err.kind === 'ObjectId') {
+		if (err.kind === 'ObjectId' || err.name === 'NotFound') {
 			return res.status(404).send({
-				message: idNotFoundMessage(noteId)
+				message: noteNotFoundMessage(noteId)
 			});
 		}
 
 		return res.status(500).send({
-			message: `Error retrieving note with id ${noteId}.`
+			message: err.message || `Error retrieving note with id ${noteId}.`
 		});
 	}
 }
@@ -70,20 +68,20 @@ export async function updateOne(req: Request, res: Response) {
 
 		if (!modifiedNote) {
 			return res.status(404).send({
-				message: idNotFoundMessage(noteId)
+				message: noteNotFoundMessage(noteId)
 			});
 		}
 
 		res.send(modifiedNote);
 	} catch(err: any) {
-		if (err.kind === 'ObjectId') {
+		if (err.kind === 'ObjectId' || err.name === 'NotFound') {
 			return res.status(404).send({
-				message: idNotFoundMessage(noteId)
+				message: noteNotFoundMessage(noteId)
 			});
 		}
 
 		return res.status(500).send({
-			message: `Error updating note with id ${noteId}.`
+			message: err.message || `Error updating note with id ${noteId}.`
 		});
 	}
 }
@@ -92,10 +90,9 @@ export async function deleteOne(req: Request, res: Response) {
 	const noteId = req.params.noteId;
 	
 	try {
-		const deletedNote = await Note.findByIdAndDelete(noteId);
-		if (!deletedNote) {
+		if (!await Note.findByIdAndDelete(noteId)) {
 			return res.status(404).send({
-				message: idNotFoundMessage(noteId)
+				message: noteNotFoundMessage(noteId)
 			});
 		}
 
@@ -103,12 +100,12 @@ export async function deleteOne(req: Request, res: Response) {
 	} catch(err: any) {
 		if (err.kind === 'ObjectId' || err.name === 'NotFound') {
 			return res.status(404).send({
-				message: idNotFoundMessage(noteId)
+				message: noteNotFoundMessage(noteId)
 			});
 		}
 
 		return res.status(500).send({
-			message: `Could not delete note with id ${noteId}.`
+			message: err.message || `Could not delete note with id ${noteId}.`
 		});
 	}
 }

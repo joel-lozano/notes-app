@@ -7,7 +7,7 @@ import './NotesList.css'
 export default function NotesList(props: any) {
     const [hoveredNote, setHoveredNote] = useState<Note | null>(null);
     const setFocusedNote = props.setFocusedNote;
-    const notesList: Array<JSX.Element> = props.notes.map((note: Note) => {
+    const notesList: Array<JSX.Element> = props.notes.map((note: Note, index: number) => {
         const { date, time } = parseTimestamp(note.updatedAt);
         let background = 'transparent';
 

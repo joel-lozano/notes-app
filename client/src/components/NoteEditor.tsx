@@ -16,7 +16,8 @@ export default function NoteEditor(props: any) {
         }
 
         try {
-            const data: Note = await (await fetch(`/notes/${focusedNote._id}`, {
+            const data: Note = await(
+                await fetch(`/notes/${focusedNote._id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(state)
@@ -26,8 +27,8 @@ export default function NoteEditor(props: any) {
             // Add some type of error checking
             // Check against possible responses from API
             // Make use of data declared above
-        } catch (error) {
-            console.error(error);
+        } catch (err: any) {
+            console.error(err.message);
         }
     
         props.updateNotes();
@@ -47,8 +48,8 @@ export default function NoteEditor(props: any) {
             // Add some type of error checking
             // Check against possible responses from API
             // Make use of data declared above
-        } catch (error) {
-            console.error(error);
+        } catch (err: any) {
+            console.error(err.message);
         }
     
         props.updateNotes(true);
