@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Note } from '../Types';
+import Note from '../types/Note';
 import './NoteEditor.css';
 
 export default function NoteEditor(props: any) {
@@ -40,7 +40,8 @@ export default function NoteEditor(props: any) {
         }
 
         try {
-            const data: Note = await (await fetch(`/notes/${focusedNote._id}`, {
+            const data: Note = await(
+                await fetch(`/notes/${focusedNote._id}`, {
                     method: 'DELETE',
                 })
             ).json();

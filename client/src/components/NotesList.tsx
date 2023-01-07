@@ -1,7 +1,7 @@
 import parseTimestamp from '../utils/parseTimestamp';
 import NewNoteButton from './NewNoteButton';
 import { useState } from 'react';
-import { Note } from '../Types';
+import Note from '../types/Note';
 import './NotesList.css'
 
 export default function NotesList(props: any) {
@@ -58,7 +58,7 @@ export default function NotesList(props: any) {
     return (
         <section className="notes-list">
             <ul>
-                <NewNoteButton 
+                <NewNoteButton
                     updateNotes={props.updateNotes}
                     setFocusedNote={setFocusedNote}
                 />

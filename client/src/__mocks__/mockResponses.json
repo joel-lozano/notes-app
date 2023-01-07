@@ -1,0 +1,20 @@
+{
+    "getOneNote": [
+        {
+            "_id": "63b9091e108b2e4b96935e5b",
+            "title": "Untitled Note",
+            "content": "Empty note",
+            "createdAt": "2023-01-07T05:54:38.110Z",
+            "updatedAt": "2023-01-07T05:54:38.110Z",
+            "__v": 0
+        }
+    ],
+    "createNote": {
+        "title": "Untitled Note",
+        "content": "Empty note",
+        "_id": "63b9091e108b2e4b96935e5b",
+        "createdAt": "2023-01-07T05:54:38.110Z",
+        "updatedAt": "2023-01-07T05:54:38.110Z",
+        "__v": 0
+    }
+}

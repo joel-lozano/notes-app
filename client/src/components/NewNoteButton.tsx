@@ -1,6 +1,6 @@
 import React from 'react';
 import './NewNoteButton.css';
-import { Note } from '../Types'
+import Note from '../types/Note';
 
 export default function NewNoteButton(props: any) {
     const handleClick = async (event: React.MouseEvent<HTMLLIElement>) => {
@@ -22,7 +22,11 @@ export default function NewNoteButton(props: any) {
     }
 
     return (
-        <li className="new-note-button" onClick={handleClick}>
+        <li
+            key="new-note-button"
+            className="new-note-button"
+            onClick={handleClick}
+        >
             <span className="material-symbols-outlined">
                 note_add
             </span>
