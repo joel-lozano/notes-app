@@ -1,5 +1,6 @@
 import { render, screen, within, waitFor } from '@testing-library/react';
-import mockResponses from './__mocks__/mockResponses.json';
+import noteActions from './__mocks__/noteActions.json';
+import getExisting from './__mocks__/getExisting.json';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import Note from './types/Note';
@@ -11,28 +12,42 @@ import App from './App';
  * component test file.
 */
 
+const NOTES = {
+    NEW: {
+        TITLE: /untitled note/i,
+        CONTENT: /empty note/i
+    },
+    TEST: {
+        TITLE: /test/i,
+        CONTENT: /example/i
+    }
+};
+const EDITOR_DEFAULT = {
+    TITLE: /no notes/i,
+    CONTENT: /create one to get started/i
+};
+const CREATE_NOTE_LABEL = /create new note/i;
+
 function setup(mockResponse: Array<Note>): void {
     fetchMock.once(JSON.stringify(mockResponse));
     render(<App />);
 }
 
 describe('Notes list', () => {
-    it('renders create new note button', async () => {
+    it('renders create note button', async () => {
         setup([]);
-        const createNoteLabel = /create/i;
         const notesList = screen.getByRole('list');
 
-        expect(within(notesList).getByText(createNoteLabel)).toBeInTheDocument();
-        await waitFor(() => within(notesList).findByText(createNoteLabel));
+        expect(within(notesList).getByText(CREATE_NOTE_LABEL)).toBeInTheDocument();
+        await waitFor(() => within(notesList).findByText(CREATE_NOTE_LABEL));
     });
 
     it('updates display on render', async () => {
-        setup(mockResponses.getOneNote);
-        const testNoteTitle = /untitled/i;
+        setup(getExisting.oneTitled);
         const notesList = screen.getByRole('list');
 
-        expect(within(notesList).queryByText(testNoteTitle)).not.toBeInTheDocument();
-        await waitFor(() => within(notesList).findByText(testNoteTitle));
+        expect(within(notesList).queryByText(NOTES.TEST.TITLE)).not.toBeInTheDocument();
+        await waitFor(() => within(notesList).findByText(NOTES.TEST.TITLE));
     });
 });
 
@@ -40,40 +55,42 @@ describe('Create note button', () => {
     it('adds note to list and focuses on click', async () => {
         setup([]);
         const notesList = screen.getByRole('list');
-        fetchMock.once(JSON.stringify(mockResponses.createNote));
-        fetchMock.once(JSON.stringify(mockResponses.getOneNote));
+        fetchMock.once(JSON.stringify(noteActions.create));
+        fetchMock.once(JSON.stringify(getExisting.oneUntitled));
         
-        userEvent.click(within(notesList).getByText(/create/i));
-        await waitFor(() => within(notesList).findByText(/untitled/i));
+        userEvent.click(within(notesList).getByText(CREATE_NOTE_LABEL));
+        await waitFor(() => within(notesList).findByText(NOTES.NEW.TITLE));
+        await waitFor(() => within(notesList).findByText(NOTES.NEW.CONTENT));
 
         const [ focusedTitle, focusedContent ] = screen.getAllByRole('textbox');
-        await waitFor(() => within(focusedTitle).findByText(/untitled/i));
-        await waitFor(() => within(focusedContent).findByText(/empty/i));
+        await waitFor(() => within(focusedTitle).findByText(NOTES.NEW.TITLE));
+        await waitFor(() => within(focusedContent).findByText(NOTES.NEW.CONTENT));
     });
 });
 
 describe('Note editor', () => {
-    const DEFAULT = {
-        'TITLE': /no notes/i,
-        'CONTENT': /create one/i
-    };
-
     it('renders default message', async () => {
         setup([]);
         const [ title, content ] = screen.getAllByRole('textbox');
 
-        expect(within(title).getByText(DEFAULT.TITLE)).toBeInTheDocument();
-        expect(within(content).getByText(DEFAULT.CONTENT)).toBeInTheDocument();
+        expect(within(title).getByText(EDITOR_DEFAULT.TITLE)).toBeInTheDocument();
+        expect(within(content).getByText(EDITOR_DEFAULT.CONTENT)).toBeInTheDocument();
 
-        await waitFor(() => within(title).findByText(DEFAULT.TITLE));
-        await waitFor(() => within(content).findByText(DEFAULT.CONTENT));
+        await waitFor(() => within(title).findByText(EDITOR_DEFAULT.TITLE));
+        await waitFor(() => within(content).findByText(EDITOR_DEFAULT.CONTENT));
     });
 
+
+    // Giving act(...) error and I don't know why
+    // On useEffect(() => setState(focusedNote), []) in noteEditor
     it('updates display on render', async () => {
-        setup(mockResponses.getOneNote);
+        setup(getExisting.oneTitled);
         const [ title, content ] = screen.getAllByRole('textbox');
 
-        await waitFor(() => within(title).findByText(/untitled/i));
-        await waitFor(() => within(content).findByText(/empty/i));
+        expect(within(title).getByText(EDITOR_DEFAULT.TITLE)).toBeInTheDocument();
+        expect(within(content).getByText(EDITOR_DEFAULT.CONTENT)).toBeInTheDocument();
+
+        await waitFor(() => within(title).findByText(NOTES.TEST.TITLE));
+        await waitFor(() => within(content).findByText(NOTES.TEST.CONTENT));
     });
 });

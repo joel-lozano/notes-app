@@ -26,13 +26,7 @@ function App() {
 			}
 
 			if (focusFirstNote) {
-				let noteToFocus = defaultNote;
-
-				if (data.length) {
-					noteToFocus = data[0];
-				}
-
-				setFocusedNote(noteToFocus);
+				setFocusedNote(data.length? data[0] : defaultNote);
 			}
 		} catch (err: any) {
 			console.error(err.message);

@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Note from '../types/Note';
 import './NoteEditor.css';
 
 export default function NoteEditor(props: any) {
-    const focusedNote: Note = props.note;
+    const focusedNote = props.note;
     const [state, setState] = useState<Note>(focusedNote);
 
+    // Using a ref to avoid useEffect firing on initial render
+    // since state is already initialized to focusedNote
+    const initialRender = useRef<boolean>(true);
+
     useEffect(() => {
-        setState(focusedNote);
+        if (initialRender.current) {
+            initialRender.current = false;
+        } else {
+            setState(focusedNote);
+        }
     }, [focusedNote]);
 
     const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
