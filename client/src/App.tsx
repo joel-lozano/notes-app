@@ -38,7 +38,7 @@ function App() {
 		}
 
 		if (updateStatus) {
-			setStatus('Something really really really really really really really really really really really really really really really long.');
+			setStatus('Updated notes successfully.');
 		}
 	}
 	
