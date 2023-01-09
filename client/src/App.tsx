@@ -11,9 +11,14 @@ const defaultNote: Note = {
 
 function App() {
 	const [notes, setNotes] = useState<Array<Note>>([]);
+	const [status, setStatus] = useState<string>('');
 	const [focusedNote, setFocusedNote] = useState<Note>(defaultNote);
 
-	const updateNotes = async (focusFirstNote = false) => {
+	useEffect(() => { console.log(status) }, [status]);
+
+	const updateNotes = async (focusFirstNote=false, updateStatus=false) => {
+		setStatus('Getting notes from database...');
+
 		try {
 			const data: Array<Note> | { message: string } = await(
 				await fetch('/notes')
@@ -29,13 +34,17 @@ function App() {
 				setFocusedNote(data.length? data[0] : defaultNote);
 			}
 		} catch (err: any) {
-			console.error(err.message);
+			setStatus(err.message);
+		}
+
+		if (updateStatus) {
+			setStatus('Something really really really really really really really really really really really really really really really long.');
 		}
 	}
 	
 	// Set up initial display on page load
 	useEffect(() => {
-		updateNotes(true);
+		updateNotes(true, true);
 	}, []);
 
 	return (
@@ -43,10 +52,13 @@ function App() {
 			<main>
 				<NoteEditor
 					note={focusedNote}
+					setStatus={setStatus}
 					updateNotes={updateNotes}
 				/>
 				<NotesList
 					notes={notes}
+					status={status}
+					setStatus={setStatus}
 					updateNotes={updateNotes}
 					focusedNote={focusedNote}
 					setFocusedNote={setFocusedNote}

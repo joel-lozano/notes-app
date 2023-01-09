@@ -9,7 +9,7 @@
 }
 
 .new-note-button:active {
-    background-color: #DDDFFF;
+    background: #DDDFFF;
 }
 
 .new-note-button .material-symbols-outlined {

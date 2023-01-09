@@ -3,7 +3,11 @@ import './NewNoteButton.css';
 import Note from '../types/Note';
 
 export default function NewNoteButton(props: any) {
+    const setStatus = props.setStatus;
+
     const handleClick = async (event: React.MouseEvent<HTMLLIElement>) => {
+        setStatus('Creating new note in database...');
+
         try {
             const data: Note = await(
                 await fetch('/notes', { method: 'POST' })
@@ -19,6 +23,7 @@ export default function NewNoteButton(props: any) {
         }
     
         props.updateNotes();
+        setStatus('Created note successfully.');
     }
 
     return (

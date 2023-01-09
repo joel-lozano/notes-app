@@ -1,18 +1,19 @@
 import parseTimestamp from '../utils/parseTimestamp';
 import NewNoteButton from './NewNoteButton';
+import StatusDisplay from './StatusDisplay';
 import { useState } from 'react';
 import Note from '../types/Note';
 import './NotesList.css'
 
 export default function NotesList(props: any) {
     const setFocusedNote = props.setFocusedNote;
-    const [hoveredNote, setHoveredNote] = useState<Note | null>(null);
+    const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
     const notesList: Array<JSX.Element> = props.notes.map((note: Note, index: number) => {
         const { date, time } = parseTimestamp(note.updatedAt);
         let background = 'transparent';
 
-        if (note === hoveredNote) {
-            background = '#DDDDDD'
+        if (index === hoveredIndex) {
+            background = '#DDDDDD';
         }
         
         /* 
@@ -31,8 +32,8 @@ export default function NotesList(props: any) {
                 key={note._id}
                 className="notes"
                 style={{ background: background }}
-                onMouseEnter={() => setHoveredNote(note)}
-                onMouseLeave={() => setHoveredNote(null)}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(-1)}
                 onClick={() => setFocusedNote(note)}
             >
                 <span className="previews">
@@ -56,9 +57,11 @@ export default function NotesList(props: any) {
 	});
 
     return (
-        <section className="notes-list">
-            <ul>
+        <section className="right-column">
+            <StatusDisplay status={props.status} />
+            <ul className="notes-list">
                 <NewNoteButton
+                    setStatus={props.setStatus}
                     updateNotes={props.updateNotes}
                     setFocusedNote={setFocusedNote}
                 />

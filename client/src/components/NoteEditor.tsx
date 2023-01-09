@@ -4,6 +4,7 @@ import './NoteEditor.css';
 
 export default function NoteEditor(props: any) {
     const focusedNote = props.note;
+    const setStatus = props.setStatus;
     const [state, setState] = useState<Note>(focusedNote);
 
     // Using a ref to avoid useEffect firing on initial render
@@ -19,6 +20,8 @@ export default function NoteEditor(props: any) {
     }, [focusedNote]);
 
     const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
+        setStatus('Saving note to database...')
+
         if (!focusedNote._id) {
             return;
         }
@@ -36,13 +39,16 @@ export default function NoteEditor(props: any) {
             // Check against possible responses from API
             // Make use of data declared above
         } catch (err: any) {
-            console.error(err.message);
+            setStatus(err.message);
         }
     
         props.updateNotes();
+        setStatus('Saved note successfully.')
     }
 
     const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
+        setStatus('Deleting note from database...');
+
         if (!focusedNote._id) {
             return;
         }
@@ -58,10 +64,11 @@ export default function NoteEditor(props: any) {
             // Check against possible responses from API
             // Make use of data declared above
         } catch (err: any) {
-            console.error(err.message);
+            setStatus(err.message);
         }
     
         props.updateNotes(true);
+        setStatus('Deleted note successfully.');
     }
 
     return (

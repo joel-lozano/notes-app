@@ -1,9 +1,9 @@
-.notes-list {
+.right-column {
     flex: 1;
-    overflow: hidden scroll;
+    overflow: auto;
 }
 
-.notes-list ul {
+.notes-list {
     padding: 0;
     margin: 0;
 }
