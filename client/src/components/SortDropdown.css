@@ -1,0 +1,40 @@
+.dropdown {
+    position: relative;
+}
+
+.dropdown #sort-button {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.2rem;
+    padding: 0.2rem;
+    min-width: 5.7rem;
+    margin-top: 0.2rem;
+}
+
+.dropdown #sort-button .label {
+    flex: 5;
+}
+
+.dropdown #sort-button .material-symbols-outlined {
+    flex: 1;
+    font-size: 1rem;
+    transition: 200ms;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    list-style-type: none;
+    border: 1px solid black;
+    background-color: #DDDDDD;
+}
+
+.menu li {
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background-color: #DDDFFF;
+}

@@ -6,10 +6,13 @@
     min-height: 2.3rem;
     display: flex;
     align-items: center;
-}
-
-.status-display .text {
-    padding-left: 0.8rem;
+    justify-content: space-between;
+    gap: 0.8rem;
     font-size: 0.9rem;
     font-weight: 100;
+    padding: 0.4rem 0.8rem;
+}
+
+.status-display .status-container {
+    overflow-wrap: anywhere;
 }

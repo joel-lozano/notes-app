@@ -14,8 +14,6 @@ function App() {
 	const [status, setStatus] = useState<string>('');
 	const [focusedNote, setFocusedNote] = useState<Note>(defaultNote);
 
-	useEffect(() => { console.log(status) }, [status]);
-
 	const updateNotes = async (focusFirstNote=false, updateStatus=false) => {
 		setStatus('Getting notes from database...');
 
@@ -58,6 +56,7 @@ function App() {
 				<NotesList
 					notes={notes}
 					status={status}
+					setNotes={setNotes}
 					setStatus={setStatus}
 					updateNotes={updateNotes}
 					focusedNote={focusedNote}

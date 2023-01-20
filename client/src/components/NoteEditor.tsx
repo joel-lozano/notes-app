@@ -47,11 +47,11 @@ export default function NoteEditor(props: any) {
     }
 
     const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        setStatus('Deleting note from database...');
-
         if (!focusedNote._id) {
             return;
         }
+        
+        setStatus('Deleting note from database...');
 
         try {
             const data: Note = await(

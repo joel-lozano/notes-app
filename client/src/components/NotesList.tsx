@@ -58,7 +58,11 @@ export default function NotesList(props: any) {
 
     return (
         <section className="right-column">
-            <StatusDisplay status={props.status} />
+            <StatusDisplay
+                notes={props.notes}
+                status={props.status}
+                setNotes={props.setNotes}
+            />
             <ul className="notes-list">
                 <NewNoteButton
                     setStatus={props.setStatus}
