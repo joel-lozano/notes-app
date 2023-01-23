@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import express from 'express';
 // import { Deta } from 'deta';
 
+mongoose.set('strictQuery', false);
+
 const PORT = 3000;
 
 // const deta = Deta('b038srct_8bdjae5VHZ6MUZxHYyuTYkVJt6ZGhP2P');

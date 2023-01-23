@@ -1,8 +1,5 @@
 .status-display {
     border-bottom: 1px solid white;
-    position: sticky;
-    top: 0;
-    background: #1c1f23;
     min-height: 2.3rem;
     display: flex;
     align-items: center;

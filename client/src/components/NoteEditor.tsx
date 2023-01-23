@@ -20,51 +20,51 @@ export default function NoteEditor(props: any) {
     }, [focusedNote]);
 
     const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        setStatus('Saving note to database...')
-
         if (!focusedNote._id) {
             return;
         }
+        
+        setStatus('Saving note to database...');
 
         try {
-            const data: Note = await(
-                await fetch(`/notes/${focusedNote._id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(state)
-                })
-            ).json();
+            const res = await fetch(`/notes/${focusedNote._id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(state)
+            });
+            const data = await res.json();
 
-            // Add some type of error checking
-            // Check against possible responses from API
-            // Make use of data declared above
+            if (!res.ok) {
+                throw new Error(data.message);
+            }
         } catch (err: any) {
             setStatus(err.message);
+            return;
         }
     
         props.updateNotes();
-        setStatus('Saved note successfully.')
+        setStatus('Saved note successfully.');
     }
 
     const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
         if (!focusedNote._id) {
             return;
         }
-        
+
         setStatus('Deleting note from database...');
 
         try {
-            const data: Note = await(
-                await fetch(`/notes/${focusedNote._id}`, {
-                    method: 'DELETE',
-                })
-            ).json();
+            const res = await fetch(`/notes/${focusedNote._id}`, {
+                method: 'DELETE'
+            });
+            const data = await res.json();
 
-            // Add some type of error checking
-            // Check against possible responses from API
-            // Make use of data declared above
+            if (!res.ok) {
+                throw new Error(data.message);
+            }
         } catch (err: any) {
             setStatus(err.message);
+            return;
         }
     
         props.updateNotes(true);

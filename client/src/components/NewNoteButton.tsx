@@ -5,21 +5,21 @@ import Note from '../types/Note';
 export default function NewNoteButton(props: any) {
     const setStatus = props.setStatus;
 
-    const handleClick = async (event: React.MouseEvent<HTMLLIElement>) => {
+    const handleClick = async (event: React.MouseEvent<HTMLDivElement>) => {
         setStatus('Creating new note in database...');
 
         try {
-            const data: Note = await(
-                await fetch('/notes', { method: 'POST' })
-            ).json();
+            const res = await(fetch('/notes', { method: 'POST' }));
+            const data = await res.json();
 
-            // Add some type of error checking
-            // Check against possible responses from API
-            // Make use of data declared above
+            if (!res.ok) {
+                throw new Error(data.message);
+            }
 
             props.setFocusedNote(data);
         } catch (err: any) {
-            console.error(err.message);
+            setStatus(err.message);
+            return;
         }
     
         props.updateNotes();
@@ -27,7 +27,7 @@ export default function NewNoteButton(props: any) {
     }
 
     return (
-        <li
+        <div
             key="new-note-button"
             className="new-note-button"
             onClick={handleClick}
@@ -38,6 +38,6 @@ export default function NewNoteButton(props: any) {
             <span>
                 Create new note
             </span>
-        </li>
+        </div>
     );
 }

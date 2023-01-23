@@ -3,21 +3,24 @@
     overflow: auto;
 }
 
+.list-header {
+    background: #1c1f23;
+    position: sticky;
+    top: 0;
+}
+
 .notes-list {
     padding: 0;
     margin: 0;
 }
 
-.notes-list li {
-    border-bottom: 1px solid white;
-    list-style: none;
-    cursor: pointer;
-    padding: 0.8rem;
-}
-
 .notes {
+    list-style: none;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid white;
+    padding: 0.8rem;
+    cursor: pointer;
 }
 
 .notes .previews {

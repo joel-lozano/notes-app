@@ -58,17 +58,19 @@ export default function NotesList(props: any) {
 
     return (
         <section className="right-column">
-            <StatusDisplay
-                notes={props.notes}
-                status={props.status}
-                setNotes={props.setNotes}
-            />
-            <ul className="notes-list">
+            <div className="list-header">
+                <StatusDisplay
+                    notes={props.notes}
+                    status={props.status}
+                    setNotes={props.setNotes}
+                />
                 <NewNoteButton
                     setStatus={props.setStatus}
                     updateNotes={props.updateNotes}
                     setFocusedNote={setFocusedNote}
                 />
+            </div>
+            <ul className="notes-list">
                 {notesList}
             </ul>
         </section>

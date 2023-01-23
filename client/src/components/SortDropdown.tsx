@@ -23,6 +23,11 @@ export default function SortDropdown(props: any) {
 
             case SORT.DATE:
                 criteria = 'updatedAt'
+                break;
+
+            default:
+                console.error(`Sort called with invalid argument: ${property}`);
+                return;
         }
 
         if (property === lastSortClicked.current) {
