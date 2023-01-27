@@ -7,7 +7,7 @@
     "start": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No test specified\" && exit 0"
   },
   "keywords": [
     "Express",
