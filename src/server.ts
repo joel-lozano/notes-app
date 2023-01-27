@@ -8,9 +8,6 @@ mongoose.set('strictQuery', false);
 
 const PORT = 3000;
 
-// const deta = Deta('b038srct_8bdjae5VHZ6MUZxHYyuTYkVJt6ZGhP2P');
-// const db = deta.Base('notesDB');
-
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +15,10 @@ app.use(express.json());
 
 (async () => {
 	try {
+		if (!dbConfig.url) {
+			throw new Error('No environment variable set for database url.')
+		}
+
 		await mongoose.connect(dbConfig.url);
 		console.log('Connected to database successfully.');
 	} catch (err: any) {
