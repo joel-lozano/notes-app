@@ -1,8 +1,9 @@
 {
-    "extends": "./tsconfig",
-    "exclude": [
-      "./src/__tests__/**",
-      "./src/__mocks__/**",
-      "./src/test-utils"
-    ]
-  }
+  "extends": "./tsconfig",
+  "exclude": [
+    "./src/__tests__/**",
+    "./src/__mocks__/**",
+    "./src/test-utils"
+  ],
+  "include": ["vite.config.ts"]
+}
