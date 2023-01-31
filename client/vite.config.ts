@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/notes': 'http://localhost:3000'
-      // '/notes': 'https://notes-app-jlz.azurewebsites.net'
+      // '/notes': 'http://localhost:3000'
+      '/notes': 'https://notes-app-jlz.azurewebsites.net'
     },
   },
 });

@@ -18,21 +18,21 @@ function App() {
 		setStatus('Getting notes from database...');
 
 		try {
-			const data: Array<Note> | { message: string } = await(
-				await fetch('/notes')
-			).json();
-
-			if (Array.isArray(data)) {
-				setNotes(data);
-			} else {
+			const res = await fetch('/notes');
+			const data = await res.json();
+			
+			if (!res.ok) {
 				throw new Error(data.message);
 			}
+			
+			setNotes(data);
 
 			if (focusFirstNote) {
 				setFocusedNote(data.length? data[0] : defaultNote);
 			}
 		} catch (err: any) {
 			setStatus(err.message);
+			return;
 		}
 
 		if (updateStatus) {
