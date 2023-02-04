@@ -16,19 +16,26 @@ function App() {
 
 	const updateNotes = async (focusFirstNote=false, updateStatus=false) => {
 		setStatus('Getting notes from database...');
+		
+		let fetchUrl = '/notes';
 
 		try {
-			const res = await fetch('/notes');
+			if (process.env.NODE_ENV === 'production') {
+				fetchUrl = 'https://notes-app-jlz.azurewebsites.net/notes';
+			}
+
+			const res = await fetch(fetchUrl);
 			const data = await res.json();
 			
 			if (!res.ok) {
+				console.log(res);
 				throw new Error(data.message);
 			}
 			
 			setNotes(data);
 
 			if (focusFirstNote) {
-				setFocusedNote(data.length? data[0] : defaultNote);
+				setFocusedNote(data.length ? data[0] : defaultNote);
 			}
 		} catch (err: any) {
 			setStatus(err.message);
