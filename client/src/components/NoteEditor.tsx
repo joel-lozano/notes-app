@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import appConfig from '../config/app.config';
 import Note from '../types/Note';
 import './NoteEditor.css';
 
@@ -27,7 +28,7 @@ export default function NoteEditor(props: any) {
         setStatus('Saving note to database...');
 
         try {
-            const res = await fetch(`/notes/${focusedNote._id}`, {
+            const res = await fetch(`${appConfig.destination}/${focusedNote._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(state)

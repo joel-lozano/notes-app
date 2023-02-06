@@ -1,6 +1,6 @@
-import React from 'react';
+import appConfig from '../config/app.config';
 import './NewNoteButton.css';
-import Note from '../types/Note';
+import React from 'react';
 
 export default function NewNoteButton(props: any) {
     const setStatus = props.setStatus;
@@ -9,7 +9,7 @@ export default function NewNoteButton(props: any) {
         setStatus('Creating new note in database...');
 
         try {
-            const res = await(fetch('/notes', { method: 'POST' }));
+            const res = await(fetch(appConfig.destination, { method: 'POST' }));
             const data = await res.json();
 
             if (!res.ok) {

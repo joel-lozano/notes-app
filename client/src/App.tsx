@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import NoteEditor from './components/NoteEditor';
 import NotesList from './components/NotesList';
+import appConfig from './config/app.config';
 import Note from './types/Note';
 import './App.css';
 
@@ -16,15 +17,9 @@ function App() {
 
 	const updateNotes = async (focusFirstNote=false, updateStatus=false) => {
 		setStatus('Getting notes from database...');
-		
-		let fetchUrl = '/notes';
-
+	
 		try {
-			if (process.env.NODE_ENV === 'production') {
-				fetchUrl = 'https://notes-app-jlz.azurewebsites.net/notes';
-			}
-
-			const res = await fetch(fetchUrl);
+			const res = await fetch(appConfig.destination);
 			const data = await res.json();
 			
 			if (!res.ok) {
