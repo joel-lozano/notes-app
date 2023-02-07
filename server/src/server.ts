@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dbConfig from '../config/database.config';
 import notesRouter from './routes/note.routes';
 import mongoose from 'mongoose';

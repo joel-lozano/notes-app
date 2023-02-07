@@ -55,7 +55,7 @@ export default function NoteEditor(props: any) {
         setStatus('Deleting note from database...');
 
         try {
-            const res = await fetch(`/notes/${focusedNote._id}`, {
+            const res = await fetch(`${appConfig.destination}/${focusedNote._id}`, {
                 method: 'DELETE'
             });
             const data = await res.json();
