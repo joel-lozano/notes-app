@@ -4,6 +4,7 @@
 }
 
 .note-editor textarea {
+    color: var(--current-fg);
     background: none;
     border: none;
     resize: none;
@@ -15,7 +16,7 @@
 }
 
 .note-editor .focused-note-title {
-    border-bottom: 1px solid white;  
+    border-bottom: 1px solid var(--current-border);  
     font-size: 2rem;
     height: 25%;
 }

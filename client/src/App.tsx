@@ -65,6 +65,9 @@ function App() {
 					setFocusedNote={setFocusedNote}
 				/>
 			</main>
+			<div className="credits">
+				<a target="_blank" href="https://icons8.com/icon/3mZCmvlo0TiW/note">Note</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+			</div>
 		</div>
 	);
 }

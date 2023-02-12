@@ -1,23 +1,60 @@
+:root {
+    /* Light theme */
+    --light-bg: white;
+    --light-fg: #000;
+    --light-border: black;
+    /* Dark theme */
+    --dark-bg: #1c1f23;
+    --dark-fg: white;
+    --dark-border: gray;
+    /* Defaults */
+    --current-bg: var(--dark-bg);
+    --current-fg: var(--dark-fg);
+    --current-border: var(--dark-border);
+}
+
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     user-select: none;
+    background-color: var(--current-bg);
+    color: var(--current-fg);
 }
 
 main {
     display: flex;
-    height: 84vh;
+    height: 82vh;
     gap: 12rem;
-    padding: 3rem 12rem;
+    padding: 3.5rem 12rem 2.5rem 12rem;
 }
 
 section {
-    border: 1px solid white;
+    border: 1px solid var(--dark-border);
+}
+
+.credits {
+    font-size: 0.8rem;
+}
+
+a {
+    color: #aaa;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --current-bg: var(--light-bg);
+        --current-fg: var(--light-fg);
+        --current-border: var(--light-border);
+    }
+
+    a {
+        color: #7FDBFF; 
+    }
 }
 
 @media (width < 1000px) {
     main {
-        height: 97vh;
-        gap: 0;
+        height: 96vh;
         padding: 0;
+        gap: 0;
     }
 }
