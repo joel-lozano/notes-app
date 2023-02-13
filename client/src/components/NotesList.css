@@ -1,3 +1,19 @@
+/* Add note focused variables and manipulate from react */
+
+:root {
+    /* Light mode */
+    --light-note-hovered-bg: #d6d6d6;
+    --light-note-active-bg: #c1c1c1;
+
+    /* Dark mode */
+    --dark-note-hovered-bg: #363636; 
+    --dark-note-active-bg: #2f2f2f;
+    
+    /* Defaults */
+    --current-note-hovered-bg: var(--dark-note-hovered-bg);
+    --current-note-active-bg: var(--dark-note-active-bg);
+}
+
 .right-column {
     flex: 1;
     overflow: auto;
@@ -21,6 +37,14 @@
     border-bottom: 1px solid var(--current-border);
     padding: 0.8rem;
     cursor: pointer;
+}
+
+.notes:hover {
+    background: var(--current-note-hovered-bg);
+}
+
+.notes:active {
+    background: var(--current-note-active-bg);
 }
 
 .notes .previews {
@@ -47,4 +71,11 @@
     color: gray;
     text-align: right;
     font-size: 0.8rem;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --current-note-hovered-bg: var(--light-note-hovered-bg);
+        --current-note-active-bg: var(--light-note-active-bg);
+    }
 }

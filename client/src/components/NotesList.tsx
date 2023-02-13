@@ -7,24 +7,19 @@ import './NotesList.css'
 
 export default function NotesList(props: any) {
     const setFocusedNote = props.setFocusedNote;
-    const [hoveredIndex, setHoveredIndex] = useState<number>(-1);
+    const [ focusedIndex, setFocusedIndex ] = useState<number>(0);
+    
     const notesList: Array<JSX.Element> = props.notes.map((note: Note, index: number) => {
-        const { date, time } = parseTimestamp(note.updatedAt);
-        let background = 'transparent';
+        const handleClick = () => {
+            setFocusedNote(note);    
+            setFocusedIndex(index);
+        };
 
-        if (index === hoveredIndex) {
-            background = '#DDDDDD';
-        }
-        
-        /* 
-        * New notes from database won't equal their equivalents in the notes
-        * array because array members don't have access to some of database
-        * notes' properties. Therefore we compare ids instead of the notes
-        * themselves, so new notes can display focused background on creation.
-        */
+        const { date, time } = parseTimestamp(note.updatedAt);
+        let background = undefined;
        
-       if (note._id === props.focusedNote._id) {
-           background = '#DDDFFF';
+        if (index === focusedIndex) {
+           background = 'var(--current-note-active-bg)';
         }
 
 		return (
@@ -32,9 +27,7 @@ export default function NotesList(props: any) {
                 key={note._id}
                 className="notes"
                 style={{ background: background }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(-1)}
-                onClick={() => setFocusedNote(note)}
+                onClick={handleClick}
             >
                 <span className="previews">
                     <div className="title-preview">

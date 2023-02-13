@@ -28,7 +28,6 @@ export default function NewNoteButton(props: any) {
 
     return (
         <div
-            key="new-note-button"
             className="new-note-button"
             onClick={handleClick}
         >

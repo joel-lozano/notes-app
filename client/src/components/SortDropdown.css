@@ -1,7 +1,7 @@
 :root {
-    --light-background: #7FDBFF;
-    --dark-background: #143d67;
-    --current-background: var(--dark-background);
+    --light-sort-button-bg: #7FDBFF;
+    --dark-sort-button-bg: #143d67;
+    --current-sort-button-bg: var(--dark-sort-button-bg);
 }
 
 .dropdown {
@@ -11,7 +11,7 @@
 .dropdown #sort-button {
     display: flex;
     border: none;
-    background-color: var(--current-background);
+    background-color: var(--current-sort-button-bg);
     color: var(--current-fg);
     justify-content: space-between;
     gap: 0.2rem;
@@ -51,6 +51,6 @@
 
 @media (prefers-color-scheme: light) {
     :root {
-        --current-background: var(--light-background);
+        --current-sort-button-bg: var(--light-sort-button-bg);
     }
 }

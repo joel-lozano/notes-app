@@ -3,10 +3,12 @@
     --light-bg: white;
     --light-fg: #000;
     --light-border: black;
+
     /* Dark theme */
     --dark-bg: #1c1f23;
     --dark-fg: white;
     --dark-border: gray;
+    
     /* Defaults */
     --current-bg: var(--dark-bg);
     --current-fg: var(--dark-fg);
@@ -53,8 +55,9 @@ a {
 
 @media (width < 1000px) {
     main {
-        height: 96vh;
+        height: 95vh;
         padding: 0;
+        padding-bottom: 0.2rem;
         gap: 0;
     }
 }

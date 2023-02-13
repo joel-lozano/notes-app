@@ -8,11 +8,11 @@
 }
 
 .new-note-button:hover {
-    background: #DDDDDD;
+    background: var(--current-note-hovered-bg);
 }
 
 .new-note-button:active {
-    background: #DDDFFF;
+    background: var(--current-note-active-bg);
 }
 
 .new-note-button .material-symbols-outlined {
